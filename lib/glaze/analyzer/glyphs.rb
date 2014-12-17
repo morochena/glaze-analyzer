@@ -1,5 +1,4 @@
-module Glaze
-  module Analyzer
+module GlazeAnalyzer
 
 class Glyphs
   attr_accessor :glyph_data
@@ -426,6 +425,4 @@ class Glyphs
   end
 
 end
-
-  end
 end

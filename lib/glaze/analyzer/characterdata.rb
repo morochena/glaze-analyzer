@@ -1,11 +1,9 @@
-module Glaze
-  module Analyzer
+module GlazeAnalyzer
 
 class CharacterData
   attr_accessor :data
 
   def initialize(realm, character_name, pvp_spec_id)
-    puts "retrieving character data for #{character_name} - #{realm}"
     uri = URI.parse("http://us.battle.net/api/wow/character/#{realm}/#{URI.encode(character_name)}?fields=talents")
     response = Net::HTTP.get_response(uri)
     character_data = JSON.parse(response.body)
@@ -23,8 +21,6 @@ class CharacterData
       sleep 5
     end
 
-    puts "successfully retrieved character data!"
-
     @data = character_data
     @pvp_spec_id = pvp_spec_id
   end
@@ -32,33 +28,24 @@ class CharacterData
   def pvp_spec
     pvp_spec_name = spec_name(@pvp_spec_id) # eg. Retribution
     spec1_name, spec2_name = get_character_spec_names # eg. Retribution, Holy
-    puts "spec 0: #{spec1_name}"
-    puts "spec 1: #{spec2_name}"
-    puts "determining pvp spec..."
 
 
     if pvp_spec_name == spec1_name && pvp_spec_name == spec2_name
       if @data['talents'].first['selected'] == true
-        puts "same spec: chose active: 0"
         return 0
       else
-        puts "same spec: chose active: 1"
         return 1
       end
     elsif pvp_spec_name == spec1_name
-      puts "different specs, chose the one listed in 3v3 data: 0"
       return 0
     elsif pvp_spec_name == spec2_name
-      puts "different specs, chose the one listed in 3v3 data: 1"
       return 1
     else
-      puts "errored out, selected: 0"
       return 0
     end
   end
 
   def get_character_spec_names
-    puts @data['name']
     begin
       spec1_name = @data['talents'][0]['spec']['name']
     rescue
@@ -75,9 +62,7 @@ class CharacterData
   end
 
   def major_glyph_names
-    puts "listing glyphs..."
     @data['talents'][pvp_spec]['glyphs']['major'].map do |glyph|
-      puts glyph['name']
       glyph['name']
     end
   end
@@ -123,6 +108,5 @@ class CharacterData
     return spec_names[spec_id]
   end
 
-end
 end
 end
