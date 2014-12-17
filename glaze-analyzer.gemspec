@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Marcus Orochena"]
   spec.email         = ["marcus@orochena.net"]
   spec.summary       = %q{WoW Arena Analytics}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.description   = %q{Queries Wow Arena Stats}
   spec.homepage      = "http://www.glaze-wow.com"
   spec.license       = "MIT"
 
