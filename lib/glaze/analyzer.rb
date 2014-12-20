@@ -45,6 +45,9 @@ module GlazeAnalyzer
 
     def average_rating(spec_id)
       total = total_spec_count(spec_id)
+      if total == 0
+        return 0
+      end
 
       ratings = @ranking_data.map do |row|
         if row['specId'] == spec_id
