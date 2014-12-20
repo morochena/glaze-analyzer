@@ -10,18 +10,49 @@ module GlazeAnalyzer
 
     attr_reader :ranking_data
 
-    def initialize
-      @ranking_data = retrieve_ranking_data
+    def initialize(file_name = '')
+      if file_name == ''
+        @ranking_data = retrieve_ranking_data
+      else
+        @ranking_data = retrieve_ranking_data(IO.read(Dir.pwd + "/" + file_name))
+      end
     end
 
-    def retrieve_ranking_data
-      puts 'retrieving 3v3 ranking data...'
-      uri = URI.parse('http://us.battle.net/api/wow/leaderboard/3v3')
-      response = Net::HTTP.get_response(uri)
-      puts 'retrieved ranking data, parsing json....'
-      results = JSON.parse(response.body)
+    def retrieve_ranking_data(file_name = '')
+      if file_name == ''
+        puts 'retrieving 3v3 ranking data...'
+        uri = URI.parse('http://us.battle.net/api/wow/leaderboard/3v3')
+        response = Net::HTTP.get_response(uri)
+        puts 'retrieved ranking data, parsing json....'
+        results = JSON.parse(response.body)
+      else
+        results = JSON.parse(file_name)
+      end
 
       results['rows']
+    end
+
+    def total_spec_count(spec_id)
+      count = 0
+      @ranking_data.each do |row|
+        if row['specId'] == spec_id
+          count += 1
+        end
+      end
+
+      count
+    end
+
+    def average_rating(spec_id)
+      total = total_spec_count(spec_id)
+
+      ratings = @ranking_data.map do |row|
+        if row['specId'] == spec_id
+          row['rating'].to_i
+        end
+      end.compact
+      average_rating = ratings.inject(&:+) / total
+
     end
 
     def get_top_characters(spec_id, number_to_retrieve)
