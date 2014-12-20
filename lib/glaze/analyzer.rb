@@ -43,10 +43,14 @@ module GlazeAnalyzer
       count
     end
 
-    def average_rating(spec_id)
+    def average_rating(spec_id, num_to_count=1000)
       total = total_spec_count(spec_id)
       if total == 0
         return 0
+      end
+
+      if num_to_count < 1000
+        total = num_to_count
       end
 
       ratings = @ranking_data.map do |row|
@@ -54,7 +58,10 @@ module GlazeAnalyzer
           row['rating'].to_i
         end
       end.compact
-      average_rating = ratings.inject(&:+) / total
+
+      ratings = ratings[0..(num_to_count-1)].compact
+
+      return ratings.inject(&:+) / total
 
     end
 

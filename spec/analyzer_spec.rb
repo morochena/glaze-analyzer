@@ -21,6 +21,10 @@ describe GlazeAnalyzer::Analyzer do
     expect(analyzer2.average_rating(268)).to eq(2025)
   end
 
+  it 'calculates average rating of top 25 characters of a spec' do
+    expect(analyzer2.average_rating(70, 5)).to eq (2638)
+  end
+
   it 'gets top arena players by spec' do
     top_paladins = analyzer.get_top_characters(70, 3)
     expect(top_paladins).to be_an(Array)
