@@ -3,9 +3,22 @@ require 'spec_helper'
 
 describe GlazeAnalyzer::Analyzer do
   analyzer = GlazeAnalyzer::Analyzer.new
+  analyzer2 = GlazeAnalyzer::Analyzer.new('leaderboard.json')
 
   it 'retrieves 3v3 ranking data and parses as array' do
     expect(analyzer.ranking_data).to be_an(Array)
+  end
+
+  it 'reads from static file if provided' do
+    expect(analyzer2.ranking_data).to be_an(Array)
+  end
+
+  it 'correctly count number of specified specs' do
+    expect(analyzer2.total_spec_count(70)).to eq(537)
+  end
+
+  it 'caculates average rating of specified spec' do
+    expect(analyzer2.average_rating(268)).to eq(2025)
   end
 
   it 'gets top arena players by spec' do
