@@ -21,24 +21,26 @@ module GlazeAnalyzer
       end
     end
 
+    # Returns total number of characters in the leaderboard, given a spec id
     def num_of_spec(spec_id)
       @ranking_data.select { |row| row['specId'] == spec_id }.size
     end
 
+    # Returns leaderboard data of n top rated characters given a spec id
+    def top_characters(spec_id, number_to_retrieve)
+      @ranking_data.map do |character|
+        character if spec_id == character['specId']
+      end.compact.first(number_to_retrieve)
+    end
+
     def average_rating_of_spec(spec_id, num_to_count=1000)
-      return 0 unless num_of_spec(spec_id) > 0 # dividing by 0 is bad =)
+      return 0 unless num_of_spec(spec_id) > 0 # dividing by 0 is bad, so we avoid it =)
 
       ratings = @ranking_data.map do |row|
         row['rating'].to_i if row['specId'] == spec_id
       end.compact.first(num_to_count)
 
       return ratings.reduce(:+) / ratings.size
-    end
-
-    def top_characters(spec_id, number_to_retrieve)
-      @ranking_data.map do |character|
-        character if spec_id == character['specId']
-      end.compact.first(number_to_retrieve)
     end
 
     def create_glyph_hash(glyph_array, spec_id)
