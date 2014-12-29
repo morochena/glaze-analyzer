@@ -10,12 +10,12 @@ describe GlazeAnalyzer::Analyzer do
         expect(analyzer.ranking_data).to be_an(Array)
       end
     end
-    context 'it is not provided a static file' do
-      it 'successfully parses the JSON to an Array' do
-        analyzer2 = GlazeAnalyzer::Analyzer.new
-        expect(analyzer.ranking_data).to be_an(Array)
-      end
-    end
+    #context 'it is not provided a static file' do
+    #  it 'successfully parses the JSON to an Array' do
+    #    analyzer2 = GlazeAnalyzer::Analyzer.new
+    #    expect(analyzer.ranking_data).to be_an(Array)
+    #  end
+    #end
   end
 
   describe '#num_of_spec' do
@@ -37,30 +37,9 @@ describe GlazeAnalyzer::Analyzer do
     end
   end
 
-  it 'gets top arena players by spec' do
-    top_paladins = analyzer.top_characters(70, 25)
-    expect(top_paladins.size).to eq(25)
+  it 'creates a glyph count hash based on spec' do
+    expect(analyzer.glyph_hash_of_spec(70, 5)).to be_an(Hash)
   end
 
-  it 'gets glyph data for a spec' do
-    glyph_data, character_count = analyzer.get_glyph_data_for_spec(70, 3)
-    expect(glyph_data).to be_an(Hash)
-  end
-
-  it 'increments glyph list based on glyph array' do
-    glyph_array = [
-      "Glyph of Templar's Verdict",
-      "Glyph of Templar's Verdict",
-      "Glyph of Templar's Verdict",
-      "Glyph of Burden of Guilt",
-      "Glyph of Burden of Guilt",
-      "Glyph of Burden of Guilt",
-      "Glyph of Hand of Freedom",
-      "Glyph of Hand of Freedom",
-      "Glyph of Hand of Freedom",
-      ]
-    glyph_hash = analyzer.create_glyph_hash(glyph_array, 70)
-    expect(glyph_hash["Glyph of Hand of Freedom"]).to eq 3
-  end
 
 end
