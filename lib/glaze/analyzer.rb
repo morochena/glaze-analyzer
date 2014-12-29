@@ -2,10 +2,13 @@ require 'net/http'
 require 'uri'
 require 'json'
 require "glaze/analyzer/version"
-require "glaze/analyzer/characterdata"
+require "glaze/analyzer/character_data"
 require "glaze/analyzer/glyphs"
 
 module GlazeAnalyzer
+  # Analyzer should retrive broad summarized data based
+  # on the leaderboard json file. Information about specifics specs
+  # should go in specs class.
   class Analyzer
 
     attr_reader :ranking_data
@@ -18,47 +21,24 @@ module GlazeAnalyzer
       end
     end
 
-    def total_spec_count(spec_id)
-      spec_count = @ranking_data.select { |row| row['specId'] == spec_id }.size
+    def num_of_spec(spec_id)
+      @ranking_data.select { |row| row['specId'] == spec_id }.size
     end
 
-    def average_rating(spec_id, num_to_count=1000)
-      total = total_spec_count(spec_id)
-      if total == 0
-        return 0
-      end
-
-      if num_to_count < 1000
-        total = num_to_count
-      end
+    def average_rating_of_spec(spec_id, num_to_count=1000)
+      return 0 unless num_of_spec(spec_id) > 0 # dividing by 0 is bad =)
 
       ratings = @ranking_data.map do |row|
-        if row['specId'] == spec_id
-          row['rating'].to_i
-        end
-      end.compact
+        row['rating'].to_i if row['specId'] == spec_id
+      end.compact.first(num_to_count)
 
-      ratings = ratings[0..(num_to_count-1)].compact
-
-      return ratings.inject(&:+) / total
-
+      return ratings.reduce(:+) / ratings.size
     end
 
-    def get_top_characters(spec_id, number_to_retrieve)
-      character_list = []
-      retrieved = 0
-
-      @ranking_data.each do |character|
-        if spec_id == character['specId']
-          character_list << character
-          retrieved += 1
-        end
-        if retrieved >= number_to_retrieve
-          break
-        end
-      end
-
-      character_list
+    def top_characters(spec_id, number_to_retrieve)
+      @ranking_data.map do |character|
+        character if spec_id == character['specId']
+      end.compact.first(number_to_retrieve)
     end
 
     def create_glyph_hash(glyph_array, spec_id)
@@ -70,7 +50,7 @@ module GlazeAnalyzer
     end
 
     def get_glyph_data_for_spec(spec_id, number_to_retrieve)
-      character_list = get_top_characters(spec_id, number_to_retrieve)
+      character_list = top_characters(spec_id, number_to_retrieve)
       glyph_list = []
       character_data_list = character_list.map do |x|
         begin
