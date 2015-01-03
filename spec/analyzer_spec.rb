@@ -38,8 +38,11 @@ describe GlazeAnalyzer::Analyzer do
   end
 
   it 'creates a glyph count hash based on spec' do
-    expect(analyzer.glyph_hash_of_spec(70, 5)).to be_an(Hash)
+    expect(analyzer.glyph_count_of_spec(70, 5)).to be_an(Hash)
   end
 
+  it 'creates a talent count hash based on spec' do
+    expect(analyzer.talent_count_of_spec(70,5)).to be_an(Hash)
+  end
 
 end

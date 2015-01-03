@@ -415,7 +415,6 @@ class Glyphs
       "Glyph of Siphon Life" => 0,
       "Glyph of Soul Consumption" => 0,
       "Glyph of Soul Swap" => 0,
-      "Glyph of Soul Swap" => 0,
       "Glyph of Soulstone" => 0,
       "Glyph of Strengthened Resolve" => 0,
       "Glyph of Twilight Ward" => 0,

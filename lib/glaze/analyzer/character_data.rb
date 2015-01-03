@@ -62,9 +62,11 @@ class CharacterData
   end
 
   def major_glyph_names
-    @data['talents'][pvp_spec]['glyphs']['major'].map do |glyph|
-      glyph['name']
-    end
+    @data['talents'][pvp_spec]['glyphs']['major'].map { |glyph| glyph['name'] }
+  end
+
+  def selected_talent_names
+    @data['talents'][pvp_spec]['talents'].map { |talent| talent['spell']['name'] }
   end
 
   def spec_name(spec_id)
