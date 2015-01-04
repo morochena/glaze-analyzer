@@ -1,3 +1,7 @@
+require 'json'
+require 'net/http'
+require 'uri'
+
 module GlazeAnalyzer
 
 class CharacterData

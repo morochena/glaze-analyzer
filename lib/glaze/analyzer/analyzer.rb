@@ -1,3 +1,7 @@
+require_relative 'character_data'
+require_relative 'glyphs'
+require_relative 'talents'
+
 module GlazeAnalyzer
 
   class Analyzer
@@ -47,10 +51,10 @@ module GlazeAnalyzer
         else
           results = JSON.parse(file_name)
         end
-  
+
         results['rows']
       end
-  
+
       def create_glyph_hash(glyph_array, spec_id)
         glyph_count = Glyphs.new(spec_id)
         glyph_array.each do |g|
@@ -58,7 +62,7 @@ module GlazeAnalyzer
         end
         glyph_count.glyph_data
       end
-  
+
       def create_talent_hash(talent_array, spec_id)
         talent_count = Talents.new(spec_id)
         talent_array.each do |t|
@@ -66,7 +70,7 @@ module GlazeAnalyzer
         end
         talent_count.talent_data
       end
-  
+
       # retrives armory information for each character specified by spec
       def character_data(spec_id, number_to_retrieve)
         top_characters(spec_id, number_to_retrieve).map do |character|
@@ -81,31 +85,31 @@ module GlazeAnalyzer
           end
         end.compact
       end
-  
+
       def glyph_list_for_spec(spec_id, number_to_retrieve)
         glyph_list = []
-  
+
         character_data(spec_id, number_to_retrieve).each do |character|
           character.major_glyph_names.each do |g|
             glyph_list << g
           end
         end
-  
+
         glyph_list
       end
-  
+
       def talent_list_for_spec(spec_id, number_to_retrieve)
         talent_list = []
-  
+
         character_data(spec_id, number_to_retrieve).each do |character|
           character.selected_talent_names.each do |t|
             talent_list << t
           end
         end
-  
+
         talent_list
       end
-  
+
       # Returns leaderboard data of n top rated characters given a spec id
       def top_characters(spec_id, number_to_retrieve)
         @ranking_data.map do |character|
