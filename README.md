@@ -1,6 +1,6 @@
 # Glaze::Analyzer
 
-TODO: Write a gem description
+A gem which retrieves and analyzes WoW Arena data.
 
 ## Installation
 

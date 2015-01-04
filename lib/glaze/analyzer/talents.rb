@@ -11,8 +11,12 @@ module GlazeAnalyzer
         @talent_data = paladin_talents
       when 256..258
         @talent_data = priest_talents
-      when 250..252
-        @talent_data = deathknight_talents
+      when 250
+        @talent_data = deathknight_blood_talents
+      when 251
+        @talent_data = deathknight_blood_talents
+      when 252
+        @talent_data = deathknight_unholy_talents
       when 102..105
         @talent_data = druid_talents
       when 253..255
@@ -81,9 +85,10 @@ module GlazeAnalyzer
         "Execution Sentence" => 0,
         "Beacon of Faith" => 0,
         "Beacon of Insight" => 0,
-        "Saved by the Light" => 0,       
+        "Saved by the Light" => 0,
       }
     end
+
     def paladin_protection_talents
       {
         "Speed of Light" => 0,
@@ -111,7 +116,7 @@ module GlazeAnalyzer
     end
 
     def deathknight_blood_talents
-      {      
+      {
        "Plaguebearer" => 0,
        "Plague Leech" => 0,
        "Unholy Blight" => 0,
@@ -241,7 +246,8 @@ module GlazeAnalyzer
     end
 
     def druid_guardian_talents
-      {       "Feline Swiftness" => 0,
+      {
+       "Feline Swiftness" => 0,
        "Displacer Beast" => 0,
        "Wild Charge" => 0,
        "Ysera's Gift" => 0,
@@ -394,7 +400,7 @@ module GlazeAnalyzer
     end
 
     def mage_fire_talents
-      {       
+      {
         "Evanesce" => 0,
        "Blazing Speed" => 0,
        "Ice Floes" => 0,
@@ -420,7 +426,7 @@ module GlazeAnalyzer
     end
 
     def mage_frost_talents
-      {       
+      {
         "Evanesce" => 0,
        "Blazing Speed" => 0,
        "Ice Floes" => 0,
@@ -446,7 +452,7 @@ module GlazeAnalyzer
     end
 
     def monk_brewmaster_talents
-      {       
+      {
         "Celerity" => 0,
        "Tiger's Lust" => 0,
        "Momentum" => 0,
@@ -573,7 +579,7 @@ module GlazeAnalyzer
        "Words of Mending" => 0,
        "Saving Grace" => 0,
       }
-    end  
+    end
 
     def priest_shadow_talents
      {
@@ -598,11 +604,11 @@ module GlazeAnalyzer
        "Clarity of Power" => 0,
        "Void Entropy" => 0,
        "Auspicious Spirits" => 0,
-     } 
-    end    
+     }
+    end
 
     def rogue_assassination_talents
-      {       
+      {
         "Nightstalker" => 0,
        "Subterfuge" => 0,
        "Shadow Focus" => 0,
@@ -628,7 +634,7 @@ module GlazeAnalyzer
     end
 
     def rogue_combat_talents
-      {       
+      {
         "Nightstalker" => 0,
        "Subterfuge" => 0,
        "Shadow Focus" => 0,
@@ -654,7 +660,7 @@ module GlazeAnalyzer
     end
 
     def rogue_subtletly_talents
-      {       
+      {
         "Nightstalker" => 0,
        "Subterfuge" => 0,
        "Shadow Focus" => 0,
@@ -729,7 +735,7 @@ module GlazeAnalyzer
       "Storm Elemental Totem" => 0,
       "Liquid Magma" => 0,
      }
-    end 
+    end
 
     def shaman_restoration_talents
      {
@@ -755,7 +761,7 @@ module GlazeAnalyzer
       "Storm Elemental Totem" => 0,
       "High Tide" => 0,
      }
-    end    
+    end
 
     def warlock_affliction_talents
      {
@@ -781,7 +787,7 @@ module GlazeAnalyzer
       "Cataclysm" => 0,
       "Demonic Servitude" => 0,
      }
-    end 
+    end
 
     def warlock_demonology_talents
      {
@@ -807,7 +813,7 @@ module GlazeAnalyzer
       "Cataclysm" => 0,
       "Demonic Servitude" => 0,
      }
-    end 
+    end
 
     def warlock_destruction_talents
      {
@@ -833,7 +839,7 @@ module GlazeAnalyzer
       "Cataclysm" => 0,
       "Demonic Servitude" => 0,
      }
-    end   
+    end
 
     def warrior_arms_talents
      {
@@ -858,8 +864,8 @@ module GlazeAnalyzer
       "Anger Management" => 0,
       "Ravager" => 0,
       "Siegebreaker" => 0,
-     } 
-    end   
+     }
+    end
 
     def warrior_fury_talents
          {
@@ -884,8 +890,8 @@ module GlazeAnalyzer
       "Anger Management" => 0,
       "Ravager" => 0,
       "Siegebreaker" => 0,
-     } 
-    end  
+     }
+    end
 
     def warrior_protection_talents
      {
@@ -910,7 +916,7 @@ module GlazeAnalyzer
       "Anger Management" => 0,
       "Ravager" => 0,
       "Gladiator's Resolve" => 0,
-     } 
-    end 
+     }
+    end
   end
 end
