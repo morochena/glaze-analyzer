@@ -66,7 +66,11 @@ module GlazeAnalyzer
       def create_talent_hash(talent_array, spec_id)
         talent_count = Talents.new(spec_id)
         talent_array.each do |t|
+          begin
           talent_count.talent_data[t] +=1
+          rescue
+            puts 'probably wrong spec'
+          end
         end
         talent_count.talent_data
       end

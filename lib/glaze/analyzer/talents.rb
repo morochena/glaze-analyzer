@@ -22,7 +22,7 @@ module GlazeAnalyzer
       when 250
         @talent_data = deathknight_blood_talents
       when 251
-        @talent_data = deathknight_blood_talents
+        @talent_data = deathknight_frost_talents
       when 252
         @talent_data = deathknight_unholy_talents
       when 102
@@ -314,7 +314,8 @@ module GlazeAnalyzer
     end
 
     def druid_restoration_talents
-      {       "Feline Swiftness" => 0,
+      {
+       "Feline Swiftness" => 0,
        "Displacer Beast" => 0,
        "Wild Charge" => 0,
        "Ysera's Gift" => 0,
