@@ -7,32 +7,74 @@ module GlazeAnalyzer
       @talent_data = Hash.new
 
       case spec_id
-      when 65..70
-        @talent_data = paladin_talents
-      when 256..258
-        @talent_data = priest_talents
+      when 65
+        @talent_data = paladin_holy_talents
+      when 66
+        @talent_data = paladin_protection_talents
+      when 70
+        @talent_data = paladin_retribution_talents
+      when 256
+        @talent_data = priest_discipline_talents
+      when 257
+        @talent_data = priest_holy_talents
+      when 258
+        @talent_data = priest_shadow_talents
       when 250
         @talent_data = deathknight_blood_talents
       when 251
         @talent_data = deathknight_blood_talents
       when 252
         @talent_data = deathknight_unholy_talents
-      when 102..105
-        @talent_data = druid_talents
-      when 253..255
-        @talent_data = hunter_talents
-      when 62..64
-        @talent_data = mage_talents
-      when 268..270
-        @talent_data = monk_talents
-      when 259..261
-        @talent_data = rogue_talents
-      when 262..264
-        @talent_data = shaman_talents
-      when 265..267
-        @talent_data = warlock_talents
-      when 71..73
-        @talent_data = warrior_talents
+      when 102
+        @talent_data = druid_balance_talents
+      when 103
+        @talent_data = druid_feral_talents
+      when 104
+        @talent_data = druid_guardian_talents
+      when 105
+        @talent_data = druid_restoration_talents
+      when 253
+        @talent_data = hunter_beastmastery_talents
+      when 254
+        @talent_data = hunter_marksmanship_talents
+      when 255
+        @talent_data = hunter_survival_talents
+      when 62
+        @talent_data = mage_arcane_talents
+      when 63
+        @talent_data = mage_fire_talents
+      when 64
+        @talent_data = mage_frost_talents
+      when 268
+        @talent_data = monk_brewmaster_talents
+      when 269
+        @talent_data = monk_windwalker_talents
+      when 270
+        @talent_data = monk_mistweaver_talents
+      when 259
+        @talent_data = rogue_assassination_talents
+      when 260
+        @talent_data = rogue_combat_talents
+      when 261
+        @talent_data = rogue_subtletly_talents
+      when 262
+        @talent_data = shaman_elemental_talents
+      when 263
+        @talent_data = shaman_enhancement_talents
+      when 264
+        @talent_data = shaman_restoration_talents
+      when 265
+        @talent_data = warlock_affliction_talents
+      when 266
+        @talent_data = warlock_demonology_talents
+      when 267
+        @talent_data = warlock_destruction_talents
+      when 71
+        @talent_data = warrior_arms_talents
+      when 72
+        @talent_data = warrior_fury_talents
+      when 73
+        @talent_data = warrior_protection_talents
       end
 
     end
