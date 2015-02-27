@@ -22,7 +22,7 @@ class CharacterData
       response = Net::HTTP.get_response(uri)
       character_data = JSON.parse(response.body)
       tries += 1
-      sleep 5
+      sleep 2
     end
 
     @data = character_data
@@ -66,7 +66,16 @@ class CharacterData
   end
 
   def major_glyph_names
-    @data['talents'][pvp_spec]['glyphs']['major'].map { |glyph| glyph['name'] }
+    name = @data['talents'][pvp_spec]['glyphs']['major'].map do |glyph|
+      arr = []
+      uri = URI.parse("http://us.battle.net/api/wow/item/#{glyph['item']}")
+      response = Net::HTTP.get_response(uri)
+      item_data = JSON.parse(response.body)
+      arr << glyph['name']
+      arr << item_data['itemSpells'][1]['spellId']
+
+      arr
+    end
   end
 
   def selected_talent_names

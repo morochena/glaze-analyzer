@@ -23,6 +23,11 @@ module GlazeAnalyzer
       @ranking_data.select { |row| row['specId'] == spec_id }.size
     end
 
+    # Returns total number of characters in limited leaderboard given a spec id
+    def num_of_spec_within(spec_id, limit)
+      @ranking_data[0..limit].select { |row| row['specId'] == spec_id }.size
+    end
+
     def average_rating_of_spec(spec_id, limit=1000)
       return 0 unless num_of_spec(spec_id) > 0
 

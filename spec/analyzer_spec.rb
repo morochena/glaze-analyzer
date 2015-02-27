@@ -24,6 +24,12 @@ describe GlazeAnalyzer::Analyzer do
     end
   end
 
+  describe '#num_of_spec_within' do
+    it 'correctly count number of specified specs' do
+      expect(analyzer.num_of_spec_within(70, 500)).to eq(37)
+    end
+  end
+
   describe '#average_rating_of_spec' do
     context 'it is provided a limit' do
       it 'correctly calculates average rating of top 5 characters of a spec' do
