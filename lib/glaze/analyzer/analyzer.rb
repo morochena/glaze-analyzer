@@ -9,7 +9,9 @@ module GlazeAnalyzer
     # Ranking data stored as an array
     attr_reader :ranking_data
 
-    # Initialized with optional file name. If no file name specified, will grab data from http://us.battle.net/api/wow/leaderboard/3v3
+    # Initialized with optional file name.
+    # If no file name specified, will grab data from
+    # http://us.battle.net/api/wow/leaderboard/3v3
     def initialize(file_name = '')
       if file_name == ''
         @ranking_data = retrieve_ranking_data
@@ -18,7 +20,8 @@ module GlazeAnalyzer
       end
     end
 
-    # Returns total number of characters in the leaderboard given a spec id
+    # Returns total number of characters in the leaderboard
+    # given a spec id
     def num_of_spec(spec_id)
       @ranking_data.select { |row| row['specId'] == spec_id }.size
     end
@@ -36,14 +39,6 @@ module GlazeAnalyzer
       end.compact.first(limit)
 
       return ratings.reduce(:+) / ratings.size
-    end
-
-    def glyph_count_of_spec(spec_id, number_to_retrieve)
-      create_glyph_hash(glyph_list_for_spec(spec_id, number_to_retrieve), spec_id)
-    end
-
-    def talent_count_of_spec(spec_id, number_to_retrieve)
-      create_talent_hash(talent_list_for_spec(spec_id, number_to_retrieve), spec_id)
     end
 
     def glyphs_of_spec(spec_id, number_to_retrieve)
@@ -66,26 +61,6 @@ module GlazeAnalyzer
         end
 
         results['rows']
-      end
-
-      def create_glyph_hash(glyph_array, spec_id)
-        glyph_count = Glyphs.new(spec_id)
-        glyph_array.each do |g|
-          glyph_count.glyph_data[g] +=1
-        end
-        glyph_count.glyph_data
-      end
-
-      def create_talent_hash(talent_array, spec_id)
-        talent_count = Talents.new(spec_id)
-        talent_array.each do |t|
-          begin
-          talent_count.talent_data[t] +=1
-          rescue
-            puts 'probably wrong spec'
-          end
-        end
-        talent_count.talent_data
       end
 
       # retrives armory information for each character specified by spec

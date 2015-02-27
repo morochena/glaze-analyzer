@@ -66,15 +66,10 @@ class CharacterData
   end
 
   def major_glyph_names
-    name = @data['talents'][pvp_spec]['glyphs']['major'].map do |glyph|
-      arr = []
-      uri = URI.parse("http://us.battle.net/api/wow/item/#{glyph['item']}")
-      response = Net::HTTP.get_response(uri)
-      item_data = JSON.parse(response.body)
-      arr << glyph['name']
-      arr << item_data['itemSpells'][1]['spellId']
+    @data['talents'][pvp_spec]['glyphs']['major'].map do |glyph|
 
-      arr
+      glyph['name']
+
     end
   end
 
