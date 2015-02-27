@@ -45,4 +45,16 @@ describe GlazeAnalyzer::Analyzer do
     expect(analyzer.talent_count_of_spec(70,5)).to be_an(Hash)
   end
 
+  it 'creates a glyph array based on spec' do
+    glyph_list = analyzer.glyphs_of_spec(70, 5)
+    puts glyph_list
+    expect(glyph_list).to be_an(Array)
+  end
+
+  it 'creates a talent array based on spec' do
+    talent_list = analyzer.talents_of_spec(70, 5)
+    puts talent_list
+    expect(talent_list).to be_an(Array)
+  end
+
 end

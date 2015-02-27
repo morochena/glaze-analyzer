@@ -41,6 +41,14 @@ module GlazeAnalyzer
       create_talent_hash(talent_list_for_spec(spec_id, number_to_retrieve), spec_id)
     end
 
+    def glyphs_of_spec(spec_id, number_to_retrieve)
+      glyph_list_for_spec(spec_id, number_to_retrieve)
+    end
+
+    def talents_of_spec(spec_id, number_to_retrieve)
+      talent_list_for_spec(spec_id, number_to_retrieve)
+    end
+
     private
 
       def retrieve_ranking_data(file_name = '')

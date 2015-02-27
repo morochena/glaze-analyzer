@@ -1,6 +1,6 @@
 # Glaze::Analyzer
 
-A gem which retrieves and analyzes WoW Arena data.
+A gem which retrieves, analyzes and stores WoW Arena data. It defaults to querying the 3v3 leaderboard, but you can easily configure it to check the other ladders or your own data.
 
 ## Installation
 
